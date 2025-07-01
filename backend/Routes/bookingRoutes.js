@@ -1,5 +1,5 @@
 import express from 'express';
-import Booking from '../models/Booking.js';
+import Booking from '../Models/Booking.js';
 import { verifyFirebaseToken } from '../middlewares/verifyFirebaseToken.js';
 
 const router = express.Router();
