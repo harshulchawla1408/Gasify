@@ -1,20 +1,17 @@
-// backend/middleware/verifyFirebaseToken.js
-import path from 'path';
-import { fileURLToPath } from 'url';
-import fs from 'fs';
 import admin from 'firebase-admin';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-const serviceAccountPath = path.join(__dirname, '../firebaseServiceAccount.json');
-
 if (!admin.apps.length) {
-  const serviceAccount = JSON.parse(fs.readFileSync(serviceAccountPath, 'utf8'));
-  admin.initializeApp({
-    credential: admin.credential.cert(serviceAccount),
-  });
-}
+  try {
+    const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT);
 
+    admin.initializeApp({
+      credential: admin.credential.cert(serviceAccount),
+    });  
+  } catch (err) {
+    console.error("Firebase service account env variable is invalid or missing.");
+    process.exit(1); // exit to prevent broken auth
+  } 
+}   
 export const verifyFirebaseToken = async (req, res, next) => {
   const authHeader = req.headers.authorization;
 
