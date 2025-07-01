@@ -64,7 +64,7 @@ const HomePage = () => {
           <h1 className="text-5xl md:text-7xl font-bold text-white mb-4">Welcome to Gasify</h1>
           <p className="text-xl md:text-2xl text-blue-200 mb-6">24/7 Online Booking & Fast Delivery</p>
           <Link
-            to="/bookings/book-cylinder"
+            to="/booking"
             className="bg-green-500 hover:bg-green-600 text-white font-semibold py-3 px-8 rounded-lg shadow-lg transition-transform transform hover:-translate-y-1"
           >
             Book Now
